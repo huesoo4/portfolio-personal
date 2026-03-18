@@ -1,0 +1,179 @@
+CREATE OR REPLACE PROCEDURE num_socios (p_numsocios OUT NUMBER)
+IS
+BEGIN
+SELECT COUNT(*) INTO p_numsocios FROM socios;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE num_libros (p_numlibros OUT NUMBER)
+IS
+BEGIN
+SELECT COUNT(*) INTO p_numlibros FROM libros;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE socio (p_reflibro IN libros.reflibro%type)
+IS
+cursor c_socio is SELECT dni, fechaprestamo FROM prestamos WHERE reflibro = p_reflibro;
+
+BEGIN
+
+	FOR v_reg IN c_socio LOOP
+		DBMS_OUTPUT.PUT_LINE(v_reg.dni || '  ' || v_reg.fechaprestamo);
+	END LOOP;
+
+END;
+/
+
+
+CREATE OR REPLACE PROCEDURE listado (p_total OUT NUMBER)
+IS
+cursor c_libros is SELECT p.reflibro, l.nombre, l.genero, COUNT(*) AS total FROM libros l, prestamos p WHERE l.reflibro = p.reflibro GROUP BY p.reflibro, nombre, genero ORDER BY total DESC;
+
+v_total NUMBER := 0;
+v_reg c_libros%ROWTYPE;
+
+BEGIN
+OPEN c_libros;
+FOR i IN 1..4 LOOP
+	FETCH c_libros INTO v_reg;
+	EXIT WHEN c_libros%NOTFOUND;
+	
+	DBMS_OUTPUT.PUT_LINE(v_reg.nombre || '  ' || v_reg.total || '  ' || v_reg.genero);
+	socio(v_reg.reflibro);
+	v_total := v_total + 1;
+	
+END LOOP;
+CLOSE c_libros;
+p_total := v_total;
+END;
+/
+
+
+CREATE OR REPLACE PROCEDURE listadocuatromasprestados
+IS
+
+v_numsocios NUMBER;
+v_numlibros NUMBER;
+v_total NUMBER;
+
+BEGIN
+
+num_socios(v_numsocios);
+num_libros(v_numlibros);
+
+IF v_numsocios = 0 THEN
+	DBMS_OUTPUT.PUT_LINE('No hay registros en la tabla socios');
+	RETURN;
+END IF;
+
+IF v_numlibros = 0 THEN
+	DBMS_OUTPUT.PUT_LINE('No hay registros en la tabla libros');
+	RETURN;
+END IF;
+
+listado(v_total);
+
+IF v_total < 4 THEN
+	DBMS_OUTPUT.PUT_LINE('Hay menos de 4 libros prestados');
+END IF;
+
+END;
+/
+
+
+
+2.
+CREATE OR REPLACE PROCEDURE masnota (p_cod IN notas.cod%type, p_nombre OUT alumnos.apenom%type, p_nota OUT notas.nota%type)
+IS
+BEGIN
+SELECT a.apenom, n.nota INTO p_nombre, p_nota FROM alumnos a, notas n WHERE a.dni = n.dni AND n.cod = p_cod AND n.nota IN (SELECT MAX(nota) FROM notas WHERE cod = p_cod);
+END;
+/
+
+CREATE OR REPLACE PROCEDURE menosnota (p_cod IN notas.cod%type, p_nombre OUT alumnos.apenom%type, p_nota OUT notas.nota%type)
+IS
+BEGIN
+SELECT an.apenom, n.nota INTO p_nombre, p_nota FROM alumnos an, notas n WHERE an.dni = n.dni AND n.cod = p_cod AND n.nota IN (SELECT MIN(nota) FROM notas WHERE cod = p_cod);
+END;
+/
+
+
+
+
+CREATE OR REPLACE PROCEDURE total_notas (p_nota IN NUMBER, p_suspenso OUT NUMBER, p_aprobado OUT NUMBER, p_notable OUT NUMBER, p_sobresaliente OUT NUMBER)
+IS
+BEGIN
+	IF p_nota < 5 THEN
+		p_suspenso := p_suspenso + 1;
+
+	ELSIF p_nota >= 5 AND p_nota < 7 THEN
+		p_aprobado := p_aprobado + 1;
+	
+	ELSIF p_nota >= 7 AND p_nota < 9 THEN
+		p_notable := p_notable +1;
+	ELSE
+		p_sobresaliente := p_sobresaliente + 1;
+	END IF;
+	
+END;
+/
+
+
+		
+		
+CREATE OR REPLACE PROCEDURE alum_nota (p_asignatura IN asignaturas.nombre%type)
+IS
+cursor c_alumnota is SELECT al.apenom, n.nota, n.cod FROM alumnos al, notas n, asignaturas a WHERE al.dni = n.dni AND n.cod = a.cod AND a.nombre = p_asignatura;
+
+v_suspenso NUMBER := 0;
+v_aprobado NUMBER := 0;
+v_notable NUMBER := 0;
+v_sobresaliente NUMBER := 0;
+v_alummaxnota VARCHAR2(30);
+v_maxnota NUMBER;
+v_alumminnota VARCHAR2(30);
+v_minnota NUMBER;
+
+BEGIN
+DBMS_OUTPUT.PUT_LINE('=================================');
+
+	FOR v_rag IN c_alumnota LOOP
+		DBMS_OUTPUT.PUT_LINE('Alumno: ' || v_rag.apenom || ' ----> Nota: ' || v_rag.nota);
+		total_notas(v_rag.nota, v_suspenso, v_aprobado, v_notable, v_sobresaliente);
+		masnota(v_rag.cod, v_alummaxnota, v_maxnota);
+		menosnota(v_rag.cod, v_alumminnota, v_minnota);
+	END LOOP;
+
+	
+DBMS_OUTPUT.PUT_LINE('=================================');
+DBMS_OUTPUT.PUT_LINE('Suspensos ' || v_suspenso);
+DBMS_OUTPUT.PUT_LINE('Aprobados ' || v_aprobado);
+DBMS_OUTPUT.PUT_LINE('Notables ' || v_notable);
+DBMS_OUTPUT.PUT_LINE('Sobresalientes ' || v_sobresaliente);
+DBMS_OUTPUT.PUT_LINE('=================================');
+DBMS_OUTPUT.PUT_LINE('Alumno con más nota: ' || v_alummaxnota || ' ------->   Nota: ' || v_maxnota);
+DBMS_OUTPUT.PUT_LINE('Alumno con menos nota: ' || v_alumminnota || ' ------->   Nota: ' || v_minnota);
+
+END;
+/
+
+begin
+alum_nota('Aplic. Entornos 4ªGen');
+end;
+/
+
+begin
+alum_nota('Entornos Gráficos');
+end;
+/
+
+begin
+alum_nota('Sist. Informáticos');
+end;
+/
+
+begin
+alum_nota('RET');
+end;
+/

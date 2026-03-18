@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/principal.png" alt="Favicon">
+    <title>Proyectos</title>
+</head>
+<body class="cuerpo">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="sobremi.html">Sobre mí</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle letra" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Proyectos
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="proyectos.html#redes">Redes</a></li>
+                  <li><a class="dropdown-item" href="proyectos.html#sistemas">Sistemas</a></li>
+                  <li><a class="dropdown-item" href="proyectos.html#desarrollo">Desarrollo</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contacto.html">Contacto</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <br>
+
+      <h1 class="letra">Proyectos</h1>
+      <br>
+      <h2 id="redes" class="letra">Redes</h2>
+
+      <main class="container py-5">
+
+        <section class="row g-3 cajas">
+
+            <article class="col-md-4">
+                <section class="caja">
+                    <h3 class="letra">Instalación de GNS3</h3>
+                    <br>
+                    <img src="img/gns3.png" class="d-block w-100 imagen" alt="Logo de GNS3"/>
+                    <br>
+                    <p class="letra">
+                        Instalación y configuración de GNS3 para simular redes complejas.
+                        Tanto en Debian 13 como en Windows 11.
+                    </p>
+
+                    <a class="boton" href="documentos/GNS3.pdf" role="button">Ver documento</a>
+
+                </section>
+            </article>  
+
+            <!-- Caja pequeña derecha -->   
+            <article class="col-md-4">
+                <section class="caja">
+                    <h3 class="letra">Configuración de routers</h3>
+                    <br>
+                    <img src="img/router.jpg" class="d-block w-100 imagen" alt="Logo de router"/>
+                    <br>
+                    <p class="letra">
+                        Configuración de routers Cisco y rutas estáticas 
+                        para establecer conexiones entre redes. Pruebas de 
+                        conectividad.
+                    </p>
+                    
+                    <a class="boton" href="documentos/encapsulamiento.pdf" role="button">Ver documento</a>
+                </section>
+            </article>
+
+            <article class="col-md-4">
+                <section class="caja">
+                    <h3 class="letra">Configuración de switches</h3>
+                    <br>
+                    <img src="img/switches.jpg" class="d-block w-100 imagen" alt="Logo de switches"/>
+                    <br>
+                    <p class="letra">
+                        Configuración de VLANs para segmentar redes, port-bonding para aumentar 
+                        el ancho de banda y port-mirroring para monitoreo de tráfico.
+                    </p>
+
+                    <a class="boton" href="documentos/switches.pdf" role="button">Ver documento</a>
+                </section>
+            </article> 
+        </section>
+      </main>
+
+      <br>
+      <h2 id="sistemas" class="letra">Sistemas</h2>
+
+      <main class="container py-5">
+
+        <section class="row g-3 cajas">
+
+            <article class="col-md-4">
+                <section class="caja">
+                    <h3 class="letra">Separación de Home</h3>
+                    <br>
+                    <img src="img/home.jpeg" class="d-block w-100 imagen" alt="Logo de Home"/>
+                    <br>
+                    <p class="letra">
+                        Separación de la carpeta Home en una partición independiente 
+                        para mejorar la organización y seguridad de los datos.
+                    </p>
+
+                    <a class="boton" href="documentos/Home-II.pdf" role="button">Ver documento</a>
+                </section>
+            </article>  
+
+            <!-- Caja pequeña derecha -->   
+            <article class="col-md-4">
+                <section class="caja">
+                    <h3 class="letra">Configuración de raid</h3>
+                    <br>
+                    <img src="img/RAID-5.jpg" class="d-block w-100 imagen" alt="Logo de RAID-5"/>
+                    <br>
+                    <p class="letra">
+                        COnfiguración de RAID-5 para mejorar la tolerancia a fallos 
+                        y el rendimiento del almacenamiento.
+                    </p>
+                    
+                    <a class="boton" href="documentos/raid.pdf" role="button">Ver documento</a>
+                </section>
+            </article>
+
+            <article class="col-md-4">
+                <section class="caja">
+                    <h3 class="letra">Suspensión e hibernación</h3>
+                    <br>
+                    <img src="img/hibernación.webp" class="d-block w-100 imagen" alt="Logo de hibernación"/>
+                    <br>
+                    <p class="letra">
+                       Habilitación de la suspensión e hibernación en Debian 13 para 
+                       mejorar la eficiencia energética y la gestión de energía.
+                    </p>
+
+                    <a class="boton" href="documentos/hibernacion.pdf" role="button">Ver documento</a>
+                </section>
+            </article> 
+        </section>
+      </main>
+
+      <br>
+      <h2 id="desarrollo" class="letra">Desarrollo</h2>
+
+      <main class="container py-5">
+
+        <section class="row g-3 cajas">
+
+            <article class="col-md-4">
+                <section class="caja">
+                    <h3 class="letra">PLSQL</h3>
+                    <br>
+                    <img src="img/procedure.jpg" class="d-block w-100 imagen" alt="Logo de PLSQL"/>
+                    <br>
+                    <p class="letra">
+                        Desarrollo de procedimientos y funciones almacenados 
+                        en PLSQL para gestionar bases de datos Oracle.
+                    </p>
+
+                    <a class="boton" href="documentos/juvenil.txt" role="button">Ver documento</a>
+                </section>
+            </article>  
+
+            <!-- Caja pequeña derecha -->   
+            <article class="col-md-4">
+                <section class="caja">
+                    <h3 class="letra">Triggers</h3>
+                    <br>
+                    <img src="img/trigger.png" class="d-block w-100 imagen" alt="Logo de Triggers"/>
+                    <br>
+                    <p class="letra">
+                        Creación de triggers en PLSQL para automatizar tareas 
+                        y mantener la integridad de los datos.
+                    </p>
+                    
+                    <a class="boton" href="documentos/triger_practica.txt" role="button">Ver documento</a>
+                </section>
+            </article>
+
+            <article class="col-md-4">
+                <section class="caja">
+                    <h3 class="letra">Bash Script</h3>
+                    <br>
+                    <img src="img/bash.png" class="d-block w-100 imagen" alt="Logo de Bash"/>
+                    <br>
+                    <p class="letra">
+                        Desarrollo de scripts en Bash para automatizar tareas administrativas 
+                        y de mantenimiento en sistemas Linux.
+                    </p>
+
+                    <a class="boton" href="documentos/main.txt" role="button">Ver documento</a>
+                </section>
+            </article> 
+        </section>
+      </main>
+
+
+<footer class="footer text-center letra">
+
+  <a href="mailto:jlop.contact@gmail.com">
+    <img src="img/email.png" class="logo" alt="Email">
+  </a>
+
+  <a href="https://github.com/huesoo4" target="_blank">
+    <img src="img/github.png" class="logo" alt="Github">
+  </a>
+
+  <a href="https://www.linkedin.com/in/jose-manuel-lópez-hueso-017b24330" target="_blank">
+    <img src="img/linkedin.png" class="logo" alt="Linkedin">
+  </a>
+
+  <a href="https://instagram.com/huesoo4" target="_blank">
+    <img src="img/instagram.png" class="logo" alt="Instagram">
+  </a>
+
+  <p class="mt-3 mb-0">© 2026 - Mi Portfolio</p>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

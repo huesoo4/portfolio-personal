@@ -1,0 +1,102 @@
+1. Realiza una función que reciba el código de un jugador y devuelva el nombre del equipo al que
+pertenece. Controlar las siguientes excepciones:
+• Que el jugador no exista.
+• Que el jugador no tenga equipo asignado.
+
+CREATE OR REPLACE FUNCTION codjug (p_codjugador IN jugadores.codjugador%type)
+RETURN VARCHAR2
+IS
+v_nombre equiposf.nombre%type;
+BEGIN
+SELECT nombre INTO v_nombre FROM equiposf WHERE codequipo IN (SELECT codequipo FROM jugadores WHERE codjugador = p_codjugador);
+RETURN v_nombre;
+END;
+/
+
+DECLARE
+v_nombre equiposf.nombre%type;
+v_codjugador jugadores.codjugador%type := 2;
+BEGIN
+v_nombre := codjug(v_codjugador);
+DBMS_OUTPUT.PUT_LINE('El jugador con el código ' || v_codjugador || ' juega en el equipo ' || v_nombre || '.');
+END;
+/
+
+
+2. Realiza un procedimiento que reciba el código de un jugador y devuelva el número total de incidencias en las que ha participado. Si el jugador no tiene incidencias registradas, el procedimiento debe devolver 0. Para verificar el procedimiento debes crear otro procedimiento que lo llame y muestre en pantalla el número de incidencias.
+
+CREATE OR REPLACE PROCEDURE num_incidencias (p_codjugador IN jugadores.codjugador%type, p_total OUT NUMBER)
+IS
+BEGIN
+SELECT COUNT(*) INTO p_total FROM incidencias WHERE codjugador = p_codjugador;
+END;
+/
+
+
+DECLARE
+v_codjugador jugadores.codjugador%type := 4;
+v_total NUMBER;
+BEGIN
+num_incidencias(v_codjugador, v_total);
+DBMS_OUTPUT.PUT_LINE('El jugador con el código ' || v_codjugador || ' tienen ' || v_total || ' incidencias.');
+END;
+/
+
+
+3. Realiza un procedimiento que reciba como parámetro el nombre de un equipo y muestre todas las
+incidencias de sus jugadores ordenadas por minuto descendente con el siguiente formato:
+Equipo: Real Madrid.
+Jugador: Sergio Ramos Partido: 102 Minuto: 45 Tipo: Tarjeta Amarilla
+Jugador: Sergio Ramos Partido: 104 Minuto: 70 Tipo: Falta
+Jugador: Benzema Partido: 105 Minuto: 10 Tipo: Gol
+Total incidencias: 3
+
+
+CREATE OR REPLACE PROCEDURE listado (p_nombre IN equiposf.nombre%type)
+IS
+v_total NUMBER := 0;
+
+cursor c_listado is SELECT e.nombre AS equipo, j.nombre, i.codpartido, i.minuto, i.tipo FROM jugadores j, incidencias i, equiposf e WHERE j.codjugador = i.codjugador AND j.codequipo = e.codequipo AND (e.nombre = p_nombre OR p_nombre = '*') ORDER BY i.minuto ASC;
+
+BEGIN
+	IF p_nombre = '*' THEN
+		DBMS_OUTPUT.PUT_LINE('Equipos: TODOS');
+	ELSE
+		DBMS_OUTPUT.PUT_LINE('Equipo: ' || p_nombre);
+	END IF;
+	
+	FOR v_listado IN c_listado LOOP
+		DBMS_OUTPUT.PUT_LINE('Jugador: ' || v_listado.nombre || ' Partido: ' ||v_listado.codpartido || ' Minuto: ' || v_listado.minuto || ' Tipo: ' || v_listado.tipo);
+   	
+		v_total := v_total + 1;
+
+	END LOOP;
+DBMS_OUTPUT.PUT_LINE('Total incidencias: ' || v_total);
+END;
+/
+
+
+BEGIN 
+listado('Real Madrid');
+END;
+/
+
+BEGIN 
+listado('*');
+END;
+/
+
+
+4. Crea un trigger de integridad referencial de actualización en cascada que permita que cuando se
+modifique el código de un equipo (codequipo) en la tabla EQUIPOSF, se actualice automáticamente en la
+tabla JUGADORES. (1,5 puntos)
+
+
+
+
+
+
+
+
+
+

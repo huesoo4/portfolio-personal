@@ -1,0 +1,247 @@
+:root  {
+    --color-fondo: #0b272a;
+    --color-cabeceras: #244747;
+    --color-caja: #4e706b;
+    --color-hover: #7b9c92;
+    --color-texto: #dad7c5;
+}
+
+.cuerpo{
+font-family:sans-serif;
+background:
+radial-gradient(circle at 20% 30%, #1b4d4d 0%, transparent 40%),
+radial-gradient(circle at 80% 70%, #244747 0%, transparent 40%),
+radial-gradient(circle at 50% 50%, #0b272a 0%, #06191b 100%);
+}
+
+.navbar{
+  background: var(--color-cabeceras);
+}
+
+.nav-item .nav-link{
+  color: var(--color-texto);
+}   
+
+.letra{
+  color: var(--color-texto);
+}
+
+h2{
+margin-bottom:30px;
+}
+
+figure{
+position:relative;
+margin:0;
+height:100%;
+overflow:hidden;
+border-radius:20px;
+}
+
+.foto-perfil{
+  width:100%;
+  max-width: 350px;
+  height:auto;
+  object-fit:cover;
+  object-position:center 20%;
+  border-radius:50%;
+  border:5px solid var(--color-fondo);
+  display:block;
+  margin:auto;
+
+  box-shadow:0 0 25px rgba(0,0,0,0.4);
+}
+
+.foto-perfil{
+transition:0.3s;
+}
+
+.foto-perfil:hover{
+transform:scale(1.05);
+}
+
+.caja{
+  background: var(--color-caja);
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  height:100%;
+}
+
+.caja-pequeña{
+  background: var(--color-caja);
+  border-radius:20px;
+  border: 4px solid var(--color-fondo);
+  text-align:center;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.caja:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+.caja-pequeña:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+.caja-pequeña p{
+    padding:20px;
+}
+
+.titulo-caja{
+    width:100%;
+    background: linear-gradient(90deg, var(--color-texto));
+    padding:10px;
+    border-radius:10px 10px 0 0;
+    margin-bottom:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:20px; 
+}
+
+.titulo-caja h3{
+    margin:0;
+    color: var(--color-fondo);
+    font-size: 22px;
+
+}
+
+.cajas{
+  display:flex;
+  justify-content:center;
+}
+
+.grande{
+  height: auto;
+}
+
+.carousel img{
+  border-radius:10px;
+  height: 300px;
+  width: 300px;
+  object-fit: contain;
+}
+
+.imagen{
+    width: 200px;
+    height: 200px;
+    object-fit:contain;
+}
+
+.footer {
+    background-color: var(--color-cabeceras);
+    padding:20px;
+}
+
+.footer a{
+    color: var(--color-texto);
+    text-decoration: none;
+}
+
+.boton {
+    background-color: var(--color-hover);
+    border: none;
+    color: var(--color-texto);
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.logo{
+    width: 32px;
+    height: 32px;
+    object-fit:contain;
+}
+
+.tabla-estudios{
+    background: var(--color-texto);
+    color: var(--color-fondo);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tabla-estudios thead{
+    background: var(--color-cabeceras);
+    color: var(--color-texto);
+}
+
+.tabla-estudios th{
+    padding:15px;
+}
+
+.tabla-estudios td{
+    padding:15px;
+}
+
+.tabla-estudios tbody tr{
+    border-bottom: 1px solid var(--color-fondo);
+}
+
+.tabla-estudios tbody tr:hover{
+    background: var(--color-hover);
+}
+
+.form-control{
+background: rgba(255,255,255,0.1);
+border: 1px solid var(--color-fondo);
+color: var(--color-texto);
+}
+
+.form-control:focus{
+background: rgba(255,255,255,0.15);
+color: var(--color-texto);
+border-color: var(--color-hover);
+box-shadow:none;
+}
+
+.lista-contacto{
+list-style:none;
+padding:0;
+}
+
+.lista-contacto li{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:12px;
+color:var(--color-texto);
+}
+
+.slider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 65px;
+}
+
+.slide-track {
+  display: flex;
+  width: calc(200px * 16);
+  animation: scroll 30s linear infinite;
+}
+
+.tech-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  margin: 0 25px;
+  flex-shrink: 0;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
